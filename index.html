@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download</title>
+    <title>Mastering Binance - Ultimate Exchange Guide</title>
     
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGM12PL7Q"></script>
@@ -13,95 +13,194 @@
       gtag('js', new Date());
       gtag('config', 'G-5NGM12PL7Q');
     </script>
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+    <style>
+        :root {
+            --binance-yellow: #F0B90B;
+            --binance-black: #0B0E11;
+            --binance-gray: #1E2329;
+            --binance-text: #EAECEF;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: var(--binance-black);
+            color: var(--binance-text);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .header {
+            background-color: var(--binance-gray);
+            padding: 1rem;
+            border-bottom: 2px solid var(--binance-yellow);
+        }
+
+        .hero {
+            text-align: center;
+            padding: 4rem 0;
+            background: linear-gradient(rgba(11,14,17,0.9), rgba(11,14,17,0.9)),
+                        url('https://i.imgur.com/ZYFDBDx.png');
+            background-size: cover;
+        }
+
+        .download-btn {
+            background-color: var(--binance-yellow);
+            color: var(--binance-black);
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: inline-block;
+            margin: 2rem 0;
+        }
+
+        .download-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(240, 185, 11, 0.3);
+        }
+
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 4rem 0;
+        }
+
+        .feature-card {
+            background-color: var(--binance-gray);
+            padding: 2rem;
+            border-radius: 8px;
+            border: 1px solid #2B3139;
+        }
+
+        .feature-card i {
+            color: var(--binance-yellow);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+
+        .badges {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 2rem 0;
+        }
+
+        .badge {
+            background-color: var(--binance-gray);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
+        }
+
+        footer {
+            background-color: var(--binance-gray);
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
 </head>
 <body>
-    <header>
-        <h1>My Awesome Book</h1>
+    <header class="header">
+        <div class="container">
+            <h1>Mastering Binance</h1>
+        </div>
     </header>
 
-    <main>
-        <div class="download-section">
-            <h2>Download Now</h2>
-            <p>Click the button below to get your free copy:</p>
+    <section class="hero">
+        <div class="container">
+            <h1>Become a Binance Expert</h1>
+            <p class="subtitle">The Complete Guide to Trading, Security, and Advanced Strategies</p>
             
-            <!-- Direct PDF link with tracking -->
-            <a href="book3.pdf" 
-               class="download-button"
-               download="book.pdf"
-               onclick="trackDownload(event)">
-                Download PDF (v1.0)
+            <div class="badges">
+                <span class="badge"><i class="fas fa-lock"></i> Secure Trading</span>
+                <span class="badge"><i class="fas fa-chart-line"></i> Advanced Strategies</span>
+                <span class="badge"><i class="fas fa-wallet"></i> Wallet Management</span>
+            </div>
+
+            <a href="book.pdf" class="download-btn" download="Mastering-Binance.pdf" onclick="trackDownload(event)">
+                <i class="fas fa-download"></i> Download Now (PDF)
             </a>
+
+            <div class="features">
+                <div class="feature-card">
+                    <i class="fas fa-robot"></i>
+                    <h3>Bot Trading Strategies</h3>
+                    <p>Learn automated trading techniques used by professionals</p>
+                </div>
+                
+                <div class="feature-card">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Security Handbook</h3>
+                    <p>Protect your assets with enterprise-level security practices</p>
+                </div>
+
+                <div class="feature-card">
+                    <i class="fas fa-coins"></i>
+                    <h3>Altcoin Mastery</h3>
+                    <p>Identify promising projects before they pump</p>
+                </div>
+            </div>
         </div>
-    </main>
+    </section>
+
+    <footer>
+        <div class="container">
+            <p>© 2023 Mastering Binance. Not affiliated with Binance.com</p>
+            <p>For educational purposes only</p>
+        </div>
+    </footer>
 
     <script>
-        // Enhanced tracking function
         function trackDownload(event) {
-            // Prevent immediate navigation
             event.preventDefault();
             
-            // Send GA event
             gtag('event', 'download', {
                 'event_category': 'Book Downloads',
                 'event_label': 'Main Download',
                 'value': 1
             });
 
-            // Start download after short delay
             setTimeout(() => {
                 window.location.href = event.target.href;
             }, 300);
         }
 
-        // Track all download link clicks
-        document.querySelectorAll('a.download-button').forEach(link => {
+        // Track all download links
+        document.querySelectorAll('a.download-btn').forEach(link => {
             link.addEventListener('click', trackDownload);
         });
     </script>
-
-    <style>
-        /* Improved styling */
-        body {
-            font-family: Arial, sans-serif;
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 2rem;
-            line-height: 1.6;
-        }
-
-        .download-section {
-            text-align: center;
-            margin: 3rem 0;
-        }
-
-        .download-button {
-            display: inline-block;
-            padding: 1rem 2rem;
-            background-color: #2ecc71;
-            color: white;
-            text-decoration: none;
-            border-radius: 5px;
-            font-size: 1.2em;
-            transition: all 0.3s ease;
-            cursor: pointer;
-        }
-
-        .download-button:hover {
-            background-color: #27ae60;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-        }
-
-        @media (max-width: 600px) {
-            body {
-                padding: 1rem;
-            }
-            
-            .download-button {
-                width: 100%;
-                box-sizing: border-box;
-            }
-        }
-    </style>
 </body>
 </html>
