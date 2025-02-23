@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download My Book</title>
+    <title>Download</title>
     
-  
-
-<!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGM12PL7Q"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-5NGM12PL7Q');
-</script>
-
-
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGM12PL7Q"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-5NGM12PL7Q');
+    </script>
 </head>
 <body>
     <header>
@@ -29,53 +24,83 @@
             <h2>Download Now</h2>
             <p>Click the button below to get your free copy:</p>
             
-            <!-- Download Button with Tracking -->
-            <a href="https://your-cloudflare-worker.touilfarouk.workers.dev/download" 
-               class="download-button" 
-               onclick="trackDownload()">
+            <!-- Direct PDF link with tracking -->
+            <a href="book.pdf" 
+               class="download-button"
+               download="book.pdf"
+               onclick="trackDownload(event)">
                 Download PDF (v1.0)
             </a>
         </div>
     </main>
 
     <script>
-        // Google Analytics Event Tracking
-        function trackDownload() {
+        // Enhanced tracking function
+        function trackDownload(event) {
+            // Prevent immediate navigation
+            event.preventDefault();
+            
+            // Send GA event
             gtag('event', 'download', {
-                'event_category': 'book',
-                'event_label': 'Book Download',
+                'event_category': 'Book Downloads',
+                'event_label': 'Main Download',
                 'value': 1
             });
+
+            // Start download after short delay
+            setTimeout(() => {
+                window.location.href = event.target.href;
+            }, 300);
         }
 
-        // Optional: Count direct link clicks (non-button clicks)
-        document.querySelectorAll('a[href*="/download"]').forEach(link => {
+        // Track all download link clicks
+        document.querySelectorAll('a.download-button').forEach(link => {
             link.addEventListener('click', trackDownload);
         });
     </script>
 
     <style>
-        /* Basic styling */
+        /* Improved styling */
         body {
             font-family: Arial, sans-serif;
             max-width: 800px;
             margin: 0 auto;
-            padding: 20px;
+            padding: 2rem;
+            line-height: 1.6;
+        }
+
+        .download-section {
+            text-align: center;
+            margin: 3rem 0;
         }
 
         .download-button {
             display: inline-block;
-            padding: 15px 30px;
+            padding: 1rem 2rem;
             background-color: #2ecc71;
             color: white;
             text-decoration: none;
             border-radius: 5px;
             font-size: 1.2em;
-            transition: background-color 0.3s;
+            transition: all 0.3s ease;
+            cursor: pointer;
         }
 
         .download-button:hover {
             background-color: #27ae60;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+        }
+
+        @media (max-width: 600px) {
+            body {
+                padding: 1rem;
+            }
+            
+            .download-button {
+                width: 100%;
+                box-sizing: border-box;
+            }
         }
     </style>
 </body>
