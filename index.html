@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Download My Book</title>
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+</head>
+<body>
+    <header>
+        <h1>My Awesome Book</h1>
+    </header>
+
+    <main>
+        <div class="download-section">
+            <h2>Download Now</h2>
+            <p>Click the button below to get your free copy:</p>
+            
+            <!-- Download Button with Tracking -->
+            <a href="https://your-cloudflare-worker.touilfarouk.workers.dev/download" 
+               class="download-button" 
+               onclick="trackDownload()">
+                Download PDF (v1.0)
+            </a>
+        </div>
+    </main>
+
+    <script>
+        // Google Analytics Event Tracking
+        function trackDownload() {
+            gtag('event', 'download', {
+                'event_category': 'book',
+                'event_label': 'Book Download',
+                'value': 1
+            });
+        }
+
+        // Optional: Count direct link clicks (non-button clicks)
+        document.querySelectorAll('a[href*="/download"]').forEach(link => {
+            link.addEventListener('click', trackDownload);
+        });
+    </script>
+
+    <style>
+        /* Basic styling */
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .download-button {
+            display: inline-block;
+            padding: 15px 30px;
+            background-color: #2ecc71;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+            transition: background-color 0.3s;
+        }
+
+        .download-button:hover {
+            background-color: #27ae60;
+        }
+    </style>
+</body>
+</html>
