@@ -4,15 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mastering Binance - Official Guide</title>
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-5NGM12PL7Q"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-5NGM12PL7Q');
-    </script>
+
 
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
@@ -123,14 +115,7 @@
     </style>
 </head>
 <body>
-    <!-- Admin Access Button (Visible only to you) -->
-    <div class="admin-access">
-        <a href="https://analytics.google.com/analytics/web/#/p479309960/realtime/overview?params=_u..nav%3Dmaui&collectionId=user" 
-           class="admin-btn"
-           target="_blank">
-            <i class="fas fa-chart-line"></i> Live Analytics
-        </a>
-    </div>
+
 
     <nav class="nav-container">
         <div class="nav-content">
@@ -153,9 +138,6 @@
                 <span class="update-date">Updated: September 2023</span>
             </div>
 
-            <a href="book3.pdf" class="download-btn" download="Mastering-Binance.pdf" onclick="trackDownload(event)">
-                <i class="fas fa-download"></i> Download Professional Edition
-            </a>
         </div>
     </header>
 
@@ -188,37 +170,7 @@
     </section>
 
     <script>
-        // Enhanced Tracking with Performance Metrics
-        function trackDownload(event) {
-            event.preventDefault();
-            
-            const downloadTime = new Date().toISOString();
-            
-            gtag('event', 'download', {
-                'event_category': 'Professional Download',
-                'event_label': 'Full Book Download',
-                'value': 1,
-                'download_time': downloadTime
-            });
 
-            // Add conversion tracking
-            gtag('event', 'conversion', {
-                'send_to': 'G-5NGM12PL7Q/conversion',
-                'value': 1.0,
-                'currency': 'USD'
-            });
-
-            setTimeout(() => {
-                window.location.href = event.target.href;
-            }, 400);
-        }
-
-        // Initialize metrics (you can connect to API later)
-        document.querySelectorAll('.metric-value').forEach(metric => {
-            if(metric.textContent === 'Loading...') {
-                metric.textContent = Math.floor(Math.random() * 5000) + 1000;
-            }
-        });
     </script>
 </body>
 </html>
