@@ -1,176 +1,185 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mastering Binance - Official Guide</title>
+    <title>ضغط ملف PDF</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
 
-
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <!-- PDF.js & jsPDF -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.16.105/pdf.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
 
     <style>
-        :root {
-            --primary-color: #1A237E;
-            --accent-color: #F9A825;
-            --dark-bg: #121212;
-            --light-text: #FFFFFF;
-            --secondary-text: #BDBDBD;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Segoe UI', system-ui, sans-serif;
-        }
-
         body {
-            background-color: var(--dark-bg);
-            color: var(--light-text);
-            line-height: 1.8;
+            background-color: #f8f9fa;
+            text-align: right;
         }
-
-        .admin-access {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            z-index: 1000;
+        .container {
+            max-width: 500px;
+            margin-top: 50px;
         }
-
-        .admin-btn {
-            background: var(--accent-color);
-            color: var(--dark-bg);
-            padding: 12px 24px;
-            border-radius: 30px;
-            text-decoration: none;
-            font-weight: 600;
-            box-shadow: 0 4px 15px rgba(249, 168, 37, 0.3);
-            transition: transform 0.3s ease;
-        }
-
-        .admin-btn:hover {
-            transform: translateY(-2px);
-        }
-
-        .nav-container {
-            background: rgba(18, 18, 18, 0.95);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            backdrop-filter: blur(10px);
-        }
-
-        .nav-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--accent-color);
-        }
-
-        /* Keep previous styles, add these new ones */
-        .analytics-panel {
-            background: rgba(255, 255, 255, 0.05);
-            padding: 2rem;
-            border-radius: 12px;
-            margin: 2rem 0;
-        }
-
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 1.5rem;
-            margin-top: 1.5rem;
-        }
-
-        .metric-card {
-            background: var(--primary-color);
-            padding: 1.5rem;
-            border-radius: 8px;
-            text-align: center;
-        }
-
-        .professional-header {
-            text-align: center;
-            padding: 4rem 0;
-            background: linear-gradient(45deg, var(--primary-color), var(--dark-bg));
-        }
-
-        .author-credential {
-            max-width: 800px;
-            margin: 2rem auto;
-            padding: 2rem;
-            background: rgba(255, 255, 255, 0.05);
-            border-left: 4px solid var(--accent-color);
+        .result {
+            color: green;
+            font-weight: bold;
         }
     </style>
 </head>
 <body>
 
-
-    <nav class="nav-container">
-        <div class="nav-content">
-            <div class="logo">Mastering Binance</div>
-            <div class="nav-links">
-                <a href="#features" class="nav-link">Features</a>
-                <a href="#author" class="nav-link">Author</a>
-                <a href="#reviews" class="nav-link">Reviews</a>
-            </div>
-        </div>
-    </nav>
-
-    <header class="professional-header">
-        <div class="container">
-            <h1>Mastering Binance</h1>
-            <p class="subtitle">The Definitive Guide to Cryptocurrency Trading Excellence</p>
+<div class="container">
+    <div class="card shadow-lg">
+        <div class="card-body text-center">
+            <h2 class="mb-3">ضغط ملف PDF</h2>
             
-            <div class="book-meta">
-                <span class="edition">Second Edition</span>
-                <span class="update-date">Updated: September 2023</span>
+            <div class="mb-3">
+                <input type="file" id="pdfInput" class="form-control" accept="application/pdf" onchange="showFileSize()">
             </div>
 
+            <div class="mb-3">
+                <label for="targetSize"><strong>حدد الحجم المطلوب (كيلوبايت):</strong></label>
+                <input type="number" id="targetSize" class="form-control" min="10" placeholder="مثلاً 500" oninput="calculateEstimatedCompression()">
+            </div>
+
+            <div class="mb-3">
+                <p><strong>الحجم الأصلي:</strong> <span id="originalSize" class="result">غير متوفر</span></p>
+                <p><strong>الحجم المتوقع بعد الضغط:</strong> <span id="estimatedSize" class="result">غير متوفر</span></p>
+                <p><strong>نسبة الضغط المتوقعة:</strong> <span id="estimatedCompressionRatio" class="result">غير متوفر</span></p>
+                <p><strong>الحجم الفعلي بعد الضغط:</strong> <span id="compressedSize" class="result">غير متوفر</span></p>
+                <p><strong>نسبة الضغط الفعلية:</strong> <span id="compressionRatio" class="result">غير متوفر</span></p>
+            </div>
+            
+            <button class="btn btn-primary w-100" onclick="compressPDF()">
+                <i class="bi bi-file-earmark-arrow-down"></i> ضغط الملف
+            </button>
+
+            <!-- شريط التقدم -->
+            <div class="progress mt-3 d-none" id="progressBarContainer">
+                <div class="progress-bar progress-bar-striped progress-bar-animated" 
+                     role="progressbar" style="width: 0%;" id="progressBar"></div>
+            </div>
         </div>
-    </header>
+    </div>
+</div>
 
-    <!-- Add this new section -->
-    <section class="analytics-panel container">
-        <h2><i class="fas fa-chart-bar"></i> Live Performance Metrics</h2>
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <h3>Total Downloads</h3>
-                <p class="metric-value">Loading...</p>
-            </div>
-            <div class="metric-card">
-                <h3>Active Readers</h3>
-                <p class="metric-value">Loading...</p>
-            </div>
-            <div class="metric-card">
-                <h3>Global Reach</h3>
-                <p class="metric-value">45+ Countries</p>
-            </div>
-        </div>
-    </section>
+<script>
+let originalSizeKB = 0;
 
-    <section class="author-credential">
-        <h2>About the Author</h2>
-        <p>John Smith, Certified Financial Analyst (CFA) with 10+ years experience in cryptocurrency markets. Former Binance API integration specialist.</p>
-        <div class="certifications">
-            <span class="cert-badge"><i class="fas fa-award"></i> CFA Charterholder</span>
-            <span class="cert-badge"><i class="fas fa-lock"></i> Certified Cybersecurity Expert</span>
-        </div>
-    </section>
+function showFileSize() {
+    const fileInput = document.getElementById('pdfInput');
+    if (fileInput.files.length) {
+        const file = fileInput.files[0];
+        originalSizeKB = (file.size / 1024).toFixed(2);
+        document.getElementById('originalSize').textContent = originalSizeKB + " كيلوبايت";
+        calculateEstimatedCompression();  // تحديث التقديرات عند تحديد الملف
+    }
+}
 
-    <script>
+function calculateEstimatedCompression() {
+    const targetSizeKB = document.getElementById('targetSize').value;
+    
+    if (originalSizeKB > 0 && targetSizeKB > 0) {
+        const estimatedRatio = ((1 - (targetSizeKB / originalSizeKB)) * 100).toFixed(2);
+        
+        document.getElementById('estimatedSize').textContent = targetSizeKB + " كيلوبايت";
+        document.getElementById('estimatedCompressionRatio').textContent = estimatedRatio + "%";
+    } else {
+        document.getElementById('estimatedSize').textContent = "غير متوفر";
+        document.getElementById('estimatedCompressionRatio').textContent = "غير متوفر";
+    }
+}
 
-    </script>
+async function compressPDF() {
+    const fileInput = document.getElementById('pdfInput');
+    const targetSizeKB = document.getElementById('targetSize').value;
+    
+    if (!fileInput.files.length) {
+        alert('يرجى اختيار ملف PDF!');
+        return;
+    }
+
+    if (!targetSizeKB || targetSizeKB <= 0) {
+        alert('يرجى إدخال حجم صالح!');
+        return;
+    }
+
+    const file = fileInput.files[0];
+    const reader = new FileReader();
+    
+    // إظهار شريط التقدم
+    document.getElementById('progressBarContainer').classList.remove('d-none');
+    document.getElementById('progressBar').style.width = "0%";
+
+    reader.onload = async function (event) {
+        const { jsPDF } = window.jspdf;
+        const pdfData = new Uint8Array(event.target.result);
+
+        try {
+            const pdf = await pdfjsLib.getDocument({ data: pdfData }).promise;
+            const newPDF = new jsPDF();
+            let quality = 1.0; // جودة الصورة الأولية
+
+            for (let i = 0; i < pdf.numPages; i++) {
+                document.getElementById('progressBar').style.width = ((i + 1) / pdf.numPages * 100) + "%";
+
+                let imgData = await renderPageToImage(pdf, i + 1, quality);
+                if (i !== 0) newPDF.addPage();
+                newPDF.addImage(imgData, 'JPEG', 5, 5, 200, 280);
+            }
+
+            // تعديل الجودة بناءً على الحجم المطلوب
+            let compressedBlob;
+            do {
+                compressedBlob = newPDF.output('blob');
+                if (compressedBlob.size / 1024 > targetSizeKB) {
+                    quality -= 0.05; // تقليل الجودة تدريجياً
+                    if (quality < 0.1) break; // لا تقل الجودة عن 10%
+                } else {
+                    break;
+                }
+            } while (true);
+
+            const compressedSizeKB = (compressedBlob.size / 1024).toFixed(2);
+            document.getElementById('compressedSize').textContent = compressedSizeKB + " كيلوبايت";
+
+            // حساب نسبة الضغط
+            const compressionRatio = ((1 - (compressedSizeKB / originalSizeKB)) * 100).toFixed(2);
+            document.getElementById('compressionRatio').textContent = compressionRatio + "%";
+
+            newPDF.save('compressed.pdf');
+            alert('تم الضغط بنجاح!');
+            document.getElementById('progressBarContainer').classList.add('d-none');
+
+        } catch (error) {
+            console.error('حدث خطأ أثناء ضغط الملف:', error);
+            alert('حدث خطأ أثناء ضغط الملف. تحقق من الكونسول لمزيد من التفاصيل.');
+        }
+    };
+
+    reader.readAsArrayBuffer(file);
+}
+
+async function renderPageToImage(pdf, pageNum, quality) {
+    const page = await pdf.getPage(pageNum);
+    const scale = 0.5;
+    const viewport = page.getViewport({ scale });
+
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    canvas.width = viewport.width;
+    canvas.height = viewport.height;
+
+    await page.render({ canvasContext: context, viewport }).promise;
+
+    return new Promise(resolve => canvas.toBlob(blob => {
+        const reader = new FileReader();
+        reader.onloadend = () => resolve(reader.result);
+        reader.readAsDataURL(blob);
+    }, 'image/jpeg', quality));
+}
+</script>
+
 </body>
 </html>
